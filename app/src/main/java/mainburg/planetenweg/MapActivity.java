@@ -1,12 +1,17 @@
 package mainburg.planetenweg;
 
+import android.*;
+import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 
+import android.support.v4.content.ContextCompat;
 import android.widget.Toast;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -22,6 +27,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
 
     private LocationManager gps;
     private Marker position;
+    private final int GPS_PERMISSION_REQUEST_CODE = 1227;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,10 +53,29 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        //LatLng sydney = new LatLng(-34, 151);
+        //mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+        //mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
 
+        //Fuck Sydney, we're in Germany!
+        LatLng mainburg = new LatLng(48.64, 11.78);
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mainburg, 14.5f));
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+            enableGPSFunctionality();
+        } else {
+            ActivityCompat.requestPermissions(this, new String[] {
+                    Manifest.permission.ACCESS_FINE_LOCATION
+            },GPS_PERMISSION_REQUEST_CODE);
+        }
+
+    }
+
+    /**
+     * Only call this when it is ensured you have the appropriate permission
+     */
+    private void enableGPSFunctionality() {
         gps = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         gps.requestLocationUpdates(
                 LocationManager.GPS_PROVIDER,
@@ -63,11 +88,6 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
     /************* Called after each 10 sec **********/
     @Override
     public void onLocationChanged(Location location) {
-
-        String str = "Latitude: "+location.getLatitude()+"Longitude: "+location.getLongitude();
-
-        Toast.makeText(getBaseContext(), str, Toast.LENGTH_LONG).show();
-
         if (position != null) {
             position.remove();
         }
@@ -101,5 +121,20 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
 
     @Override
     public void onStatusChanged(String provider, int status, Bundle extras) {
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case GPS_PERMISSION_REQUEST_CODE:
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    enableGPSFunctionality();
+
+                }
+                return;
+        }
     }
 }
