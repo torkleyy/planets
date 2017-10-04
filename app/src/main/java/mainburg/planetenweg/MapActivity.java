@@ -21,13 +21,11 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class MapActivity extends FragmentActivity implements OnMapReadyCallback, LocationListener {
+public class MapActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
 
-    private LocationManager gps;
-    private Marker position;
-    private final int GPS_PERMISSION_REQUEST_CODE = 1227;
+    private LocationMarker locMarker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +35,8 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        locMarker = new LocationMarker(this);
     }
 
     /**
@@ -61,78 +61,23 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
         LatLng mainburg = new LatLng(48.64, 11.78);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mainburg, 14.5f));
 
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                == PackageManager.PERMISSION_GRANTED) {
-            enableGPSFunctionality();
-        } else {
-            ActivityCompat.requestPermissions(this, new String[] {
-                    Manifest.permission.ACCESS_FINE_LOCATION
-            },GPS_PERMISSION_REQUEST_CODE);
+        if (!locMarker.isEnabled()) {
+            locMarker.enable(mMap);
         }
-
+        locMarker.refresh();
     }
 
-    /**
-     * Only call this when it is ensured you have the appropriate permission
-     */
-    private void enableGPSFunctionality() {
-        gps = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        gps.requestLocationUpdates(
-                LocationManager.GPS_PROVIDER,
-                10000, //the minimum time interval for notifications, in milliseconds. This field is only used as a hint
-                //to conserve power, and actual time between location, updates may be greater or lesser than this value. (See https://androidexample.com/GPS_Basic__-__Android_Example/index.php?view=article_discription&aid=68&aaid=93)
-                10,//the minimum distance interval for notifications
-                this);//The listener to which to send the updates
-    }
 
-    /************* Called after each 10 sec **********/
-    @Override
-    public void onLocationChanged(Location location) {
-        if (position != null) {
-            position.remove();
-        }
-
-        LatLng loc = new LatLng(location.getLatitude(), location.getLongitude());
-        position = mMap.addMarker(new MarkerOptions()
-                .position(loc)
-                .title("Sie sind hier."));
-
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(loc));
-    }
-
-    @Override
-    public void onProviderDisabled(String provider) {
-
-        /******** Called when User disables Gps *********/
-        Toast.makeText(getBaseContext(), "GPS deaktiviert", Toast.LENGTH_LONG).show();
-
-        if (position != null) {
-            position.remove();
-        }
-    }
-
-    @Override
-    public void onProviderEnabled(String provider) {
-
-        /******** Called when User enables Gps  *********/
-
-        Toast.makeText(getBaseContext(), "GPS aktiviert", Toast.LENGTH_LONG).show();
-    }
-
-    @Override
-    public void onStatusChanged(String provider, int status, Bundle extras) {
-    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            String permissions[], int[] grantResults) {
         switch (requestCode) {
-            case GPS_PERMISSION_REQUEST_CODE:
+            case LocationMarker.GPS_PERMISSION_REQUEST_CODE:
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    enableGPSFunctionality();
-
+                    locMarker.refresh();
                 }
                 return;
         }
