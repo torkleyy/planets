@@ -27,24 +27,27 @@ import java.util.TimerTask;
  */
 public class LocationMarker implements LocationListener {
 
+    static final int GPS_PERMISSION_REQUEST_CODE = 1227;
+
+    private final int MIN_UPDATE_DELAY = 5000;
+    private final int MIN_DISTANCE_FOR_UPDATE = 5;
+
     private GoogleMap map;
     private final Activity activity;
     private final LocationManager gps;
     private Marker position;
-    static final int GPS_PERMISSION_REQUEST_CODE = 1227;
-
-    private boolean active;
+    private boolean enabled;
 
     /**
-     * This variable indicates whether or not a location has been founb.
-     * It is needed to notify the user when his location could not have been determined.
+     * This variable indicates whether or not a location has been found.
+     * It is needed to notify the user when their location could not have been determined.
      */
     private boolean locationFound;
 
     public LocationMarker(Activity activity) {
         this.map = map;
         this.activity = activity;
-        active = false;
+        enabled = false;
         gps = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
     }
 
@@ -54,7 +57,7 @@ public class LocationMarker implements LocationListener {
      */
     public void enable(GoogleMap map) {
         this.map = map;
-        active = true;
+        enabled = true;
         if (ContextCompat.checkSelfPermission(activity, android.Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
             refresh();
@@ -69,11 +72,11 @@ public class LocationMarker implements LocationListener {
      */
     public void disable() {
         position.remove();
-        active = false;
+        enabled = false;
     }
 
     public boolean isEnabled() {
-        return active;
+        return enabled;
     }
 
     /**
@@ -83,10 +86,9 @@ public class LocationMarker implements LocationListener {
     public void refresh() {
         gps.requestLocationUpdates(
                 LocationManager.GPS_PROVIDER,
-                5000, //the minimum time interval for notifications, in milliseconds. This field is only used as a hint
-                //to conserve power, and actual time between location, updates may be greater or lesser than this value. (See https://androidexample.com/GPS_Basic__-__Android_Example/index.php?view=article_discription&aid=68&aaid=93)
-                5,//the minimum distance interval for notifications
-                this);//The listener to which to send the updates
+                MIN_UPDATE_DELAY,
+                MIN_DISTANCE_FOR_UPDATE,
+                this);
 
         locationFound = false;
         Timer timer = new Timer();
@@ -94,17 +96,16 @@ public class LocationMarker implements LocationListener {
             @Override
             public void run() {
                 if (!locationFound) {
-                    Toast.makeText(activity, "Position konnte nicht ermittelt werden.", Toast.LENGTH_LONG);
+                    Toast.makeText(activity, activity.getResources().getString(R.string.position_not_found), Toast.LENGTH_LONG);
                 }
             }
         }, 10000);
 
     }
 
-    /************* Called after each 10 sec **********/
     @Override
     public void onLocationChanged(Location location) {
-        if (!active) {
+        if (!enabled) {
             return;
         }
         locationFound = true;
@@ -115,7 +116,7 @@ public class LocationMarker implements LocationListener {
         LatLng loc = new LatLng(location.getLatitude(), location.getLongitude());
         position = map.addMarker(new MarkerOptions()
                 .position(loc)
-                .title("Sie sind hier."));
+                .title(activity.getResources().getString(R.string.your_location)));
 
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, map.getCameraPosition().zoom));
     }
@@ -124,7 +125,7 @@ public class LocationMarker implements LocationListener {
     public void onProviderDisabled(String provider) {
 
         /******** Called when User disables Gps *********/
-        Toast.makeText(activity.getBaseContext(), "GPS deaktiviert", Toast.LENGTH_LONG).show();
+        Toast.makeText(activity.getBaseContext(), activity.getResources().getString(R.string.gps_disabled), Toast.LENGTH_LONG).show();
 
         if (position != null) {
             position.remove();
@@ -136,7 +137,7 @@ public class LocationMarker implements LocationListener {
 
         /******** Called when User enables Gps  *********/
 
-        Toast.makeText(activity.getBaseContext(), "GPS aktiviert", Toast.LENGTH_LONG).show();
+        Toast.makeText(activity.getBaseContext(), activity.getResources().getString(R.string.gps_enabled), Toast.LENGTH_LONG).show();
     }
 
     @Override

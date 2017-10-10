@@ -26,6 +26,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
     private GoogleMap mMap;
 
     private LocationMarker locMarker;
+    private boolean firstTimeLoad = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,21 +58,24 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         //mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         //mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
 
-        //Fuck Sydney, we're in Germany!
-        LatLng mainburg = new LatLng(48.64, 11.78);
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mainburg, 14.5f));
+        if (firstTimeLoad) {
+            LatLng mainburg = new LatLng(48.64, 11.78);
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mainburg, 14.5f));
+            firstTimeLoad = false;// I don't want the map to focus on Mainburg everytime the activity reloads (e.g. when the user switches display rotation)
 
-        if (!locMarker.isEnabled()) {
-            locMarker.enable(mMap);
+            if (!locMarker.isEnabled()) {
+                locMarker.enable(mMap);
+            }
+            locMarker.refresh();
         }
-        locMarker.refresh();
+
+
     }
 
 
 
     @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           String permissions[], int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
         switch (requestCode) {
             case LocationMarker.GPS_PERMISSION_REQUEST_CODE:
                 // If request is cancelled, the result arrays are empty.
@@ -79,7 +83,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     locMarker.refresh();
                 }
-                return;
+                break;
         }
     }
 }

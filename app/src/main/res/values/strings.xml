@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Planetenweg</string>
     <string name="title_activity_map">Map</string>
+    <string name="gps_enabled">GPS aktiviert</string>
+    <string name="gps_disabled">GPS deaktiviert</string>
+    <string name="position_not_found">Position konnte nicht ermittelt werden.</string>
+    <string name="your_location">Sie sind hier.</string>
 </resources>
