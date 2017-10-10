@@ -68,11 +68,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
             }
             locMarker.refresh();
         }
-
-
     }
-
-
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
