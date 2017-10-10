@@ -1,6 +1,5 @@
 package mainburg.planetenweg;
 
-import android.*;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -31,6 +30,7 @@ public class LocationMarker implements LocationListener {
 
     private final int MIN_UPDATE_DELAY = 5000;
     private final int MIN_DISTANCE_FOR_UPDATE = 5;
+    private final int UNSUCCESSFUL_TRACK_DELAY = 10000;
 
     private GoogleMap map;
     private final Activity activity;
@@ -90,17 +90,25 @@ public class LocationMarker implements LocationListener {
                 MIN_DISTANCE_FOR_UPDATE,
                 this);
 
+        displayUnsuccessfulTracking();
+    }
+
+    private void displayUnsuccessfulTracking() {
         locationFound = false;
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                if (!locationFound) {
-                    Toast.makeText(activity, activity.getResources().getString(R.string.position_not_found), Toast.LENGTH_LONG);
+                if (!locationFound && enabled) {
+                    activity.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(activity, activity.getResources().getString(R.string.position_not_found), Toast.LENGTH_LONG).show();
+                        }
+                    });
                 }
             }
-        }, 10000);
-
+        }, UNSUCCESSFUL_TRACK_DELAY);
     }
 
     @Override
@@ -138,6 +146,7 @@ public class LocationMarker implements LocationListener {
         /******** Called when User enables Gps  *********/
 
         Toast.makeText(activity.getBaseContext(), activity.getResources().getString(R.string.gps_enabled), Toast.LENGTH_LONG).show();
+        refresh();
     }
 
     @Override
