@@ -12,9 +12,7 @@ import android.support.v4.content.ContextCompat;
 import android.widget.Toast;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.*;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -125,6 +123,7 @@ public class LocationMarker implements LocationListener {
         position = map.addMarker(new MarkerOptions()
                 .position(loc)
                 .title(activity.getResources().getString(R.string.your_location)));
+        position.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
 
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, map.getCameraPosition().zoom));
     }
