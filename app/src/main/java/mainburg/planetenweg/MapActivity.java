@@ -66,6 +66,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
             if (!locMarker.isEnabled()) {
                 locMarker.enable(mMap);
             }
+            locMarker.refresh();
         }
     }
 
