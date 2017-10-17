@@ -1,6 +1,5 @@
 package mainburg.planetenweg;
 
-import android.*;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -13,6 +12,7 @@ import android.support.v4.content.ContextCompat;
 import android.widget.Toast;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.*;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -31,6 +31,7 @@ public class LocationMarker implements LocationListener {
 
     private final int MIN_UPDATE_DELAY = 5000;
     private final int MIN_DISTANCE_FOR_UPDATE = 5;
+    private final int UNSUCCESSFUL_TRACK_DELAY = 10000;
 
     private GoogleMap map;
     private final Activity activity;
@@ -43,12 +44,18 @@ public class LocationMarker implements LocationListener {
      * It is needed to notify the user when their location could not have been determined.
      */
     private boolean locationFound;
+    /**
+     * This variable counts the amount of timers which delay the message that your location
+     * could not have been determined which are simultaneously running.
+     */
+    private int timersUnderway;
 
     public LocationMarker(Activity activity) {
         this.map = map;
         this.activity = activity;
         enabled = false;
         gps = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
+        timersUnderway = 0;
     }
 
     /**
@@ -90,17 +97,27 @@ public class LocationMarker implements LocationListener {
                 MIN_DISTANCE_FOR_UPDATE,
                 this);
 
+        displayUnsuccessfulTracking();
+    }
+
+    private void displayUnsuccessfulTracking() {
         locationFound = false;
+        timersUnderway++;
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                if (!locationFound) {
-                    Toast.makeText(activity, activity.getResources().getString(R.string.position_not_found), Toast.LENGTH_LONG);
+                timersUnderway--;
+                if (!locationFound && enabled && timersUnderway < 1) {
+                    activity.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(activity, activity.getResources().getString(R.string.position_not_found), Toast.LENGTH_LONG).show();
+                        }
+                    });
                 }
             }
-        }, 10000);
-
+        }, UNSUCCESSFUL_TRACK_DELAY);
     }
 
     @Override
@@ -117,6 +134,7 @@ public class LocationMarker implements LocationListener {
         position = map.addMarker(new MarkerOptions()
                 .position(loc)
                 .title(activity.getResources().getString(R.string.your_location)));
+        position.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
 
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, map.getCameraPosition().zoom));
     }
@@ -138,6 +156,7 @@ public class LocationMarker implements LocationListener {
         /******** Called when User enables Gps  *********/
 
         Toast.makeText(activity.getBaseContext(), activity.getResources().getString(R.string.gps_enabled), Toast.LENGTH_LONG).show();
+        refresh();
     }
 
     @Override
