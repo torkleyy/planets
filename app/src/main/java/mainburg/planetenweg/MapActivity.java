@@ -1,25 +1,18 @@
 package mainburg.planetenweg;
 
-import android.*;
-import android.Manifest;
-import android.content.Context;
 import android.content.pm.PackageManager;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 
-import android.support.v4.content.ContextCompat;
-import android.widget.Toast;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import mainburg.planetenweg.directions.PathRequest;
 
 public class MapActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -38,6 +31,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         mapFragment.getMapAsync(this);
 
         locMarker = new LocationMarker(this);
+
     }
 
     /**
@@ -53,6 +47,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
+
         // Add a marker in Sydney and move the camera
         //LatLng sydney = new LatLng(-34, 151);
         //mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
@@ -66,6 +61,21 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
             if (!locMarker.isEnabled()) {
                 locMarker.enable(mMap);
             }
+
+            Waypoint[] all = Waypoint.values();
+            final LatLng[] waypoints = new LatLng[all.length];
+            for (int i = 0; i < waypoints.length; i++) {
+                waypoints[i] = all[i].getLocation();
+                if (all[i].toString().startsWith("ADDITIONAL_WAYPOINT")) {
+                    continue;
+                }
+                Marker m = mMap.addMarker(new MarkerOptions()
+                .title(all[i].toString())
+                .position(all[i].getLocation()));
+                m.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET));
+            }
+
+            new PathRequest(waypoints, mMap, this).start();
         }
     }
 
