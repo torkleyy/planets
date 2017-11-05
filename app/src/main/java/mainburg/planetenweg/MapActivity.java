@@ -3,6 +3,7 @@ package mainburg.planetenweg;
 import android.content.pm.PackageManager;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -12,11 +13,13 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import mainburg.planetenweg.directions.PathRequest;
+
+import org.json.JSONException;
+
+import mainburg.planetenweg.directions.JsonData;
 
 public class MapActivity extends FragmentActivity implements OnMapReadyCallback {
-
-    private GoogleMap mMap;
+    private static final String TAG = MapActivity.class.getSimpleName();
 
     private LocationMarker locMarker;
     private boolean firstTimeLoad = true;
@@ -31,7 +34,6 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         mapFragment.getMapAsync(this);
 
         locMarker = new LocationMarker(this);
-
     }
 
     /**
@@ -44,22 +46,15 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
      * installed Google Play services and returned to the app.
      */
     @Override
-    public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
-
-
-        // Add a marker in Sydney and move the camera
-        //LatLng sydney = new LatLng(-34, 151);
-        //mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        //mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-
+    public void onMapReady(final GoogleMap googleMap) {
         if (firstTimeLoad) {
             LatLng mainburg = new LatLng(48.64, 11.78);
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mainburg, 14.5f));
-            firstTimeLoad = false;// I don't want the map to focus on Mainburg everytime the activity reloads (e.g. when the user switches display rotation)
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mainburg, 14.5f));
+            firstTimeLoad = false;// I don't want the map to focus on Mainburg everytime the
+            // activity reloads (e.g. when the user switches display rotation)
 
             if (!locMarker.isEnabled()) {
-                locMarker.enable(mMap);
+                locMarker.enable(googleMap);
             }
 
             Waypoint[] all = Waypoint.values();
@@ -69,23 +64,42 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                 if (all[i].toString().startsWith("ADDITIONAL_WAYPOINT")) {
                     continue;
                 }
-                Marker m = mMap.addMarker(new MarkerOptions()
-                .title(all[i].toString())
-                .position(all[i].getLocation()));
-                m.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET));
+
+                Marker m = googleMap.addMarker(new MarkerOptions()
+                        .title(all[i].toString())
+                        .position(all[i].getLocation()));
+                m.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory
+                        .HUE_VIOLET));
             }
 
-            new PathRequest(waypoints, mMap, this).start();
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        Drawing.drawPath(JsonData.getData(), googleMap);
+                    } catch (JSONException e) {
+                        // Should not occur, but here you go:
+                        Log.e(TAG, "Bug: stored JSON is invalid");
+                    }
+                }
+            });
         }
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[],
+                                           int[] grantResults) {
+        if (permissions.length < 2) {
+            return;
+        }
+
         switch (requestCode) {
             case LocationMarker.GPS_PERMISSION_REQUEST_CODE:
                 // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (grantResults.length > 1
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED
+                        && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
                     locMarker.refresh();
                 }
                 break;

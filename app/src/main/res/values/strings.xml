@@ -5,4 +5,5 @@
     <string name="gps_disabled">GPS deaktiviert</string>
     <string name="position_not_found">Position konnte nicht ermittelt werden.</string>
     <string name="your_location">Sie sind hier.</string>
+    <string name="show_map">Karte anzeigen</string>
 </resources>
