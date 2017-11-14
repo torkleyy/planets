@@ -35,10 +35,9 @@
 //
 //    @Override
 //    public void run() {
-//        JsonData parser = new JsonData();
 //        String url = makeURL(waypoints);
 //        Log.d(TAG, "Request URL: " + url);
-//        final String json = parser.getData(url);
+//        /*final String json = parser.getData(url);
 //        activity.runOnUiThread(new Runnable() {
 //            @Override
 //            public void run() {
@@ -48,13 +47,13 @@
 //                    e.printStackTrace();
 //                }
 //            }
-//        });
+//        });*/
 //    }
 //
 //    private String makeURL(LatLng[] waypoints) {
 //        try {
 //            StringBuilder urlString = new StringBuilder();
-//            urlString.append("https://maps.googleapis.com/maps/api/directions/json");
+//            urlString.append("https:maps.googleapis.com/maps/api/directions/json");
 //            urlString.append("?origin=");// from
 //            urlString.append(Double.toString(waypoints[0].latitude));
 //            urlString.append(",");
@@ -92,7 +91,7 @@
 //        }
 //
 //
-//        //Tranform the string into a json object
+//        //Transform the string into a json object
 //        final JSONObject json = new JSONObject(result);
 //        JSONArray routeArray = json.getJSONArray("routes");
 //        JSONObject routes = routeArray.getJSONObject(0);
