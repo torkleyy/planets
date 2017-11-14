@@ -17,6 +17,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import org.json.JSONException;
 
 import mainburg.planetenweg.directions.JsonData;
+import mainburg.planetenweg.directions.PathRequest;
 
 public class MapActivity extends FragmentActivity implements OnMapReadyCallback {
     private static final String TAG = MapActivity.class.getSimpleName();
@@ -76,7 +77,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                 @Override
                 public void run() {
                     try {
-                        Drawing.drawPath(JsonData.getData(), googleMap);
+                        Drawing.drawPath(googleMap, JsonData.getRoutePart1(), JsonData.getRoutePart2());
                     } catch (JSONException e) {
                         // Should not occur, but here you go:
                         Log.e(TAG, "Bug: stored JSON is invalid");

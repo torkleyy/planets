@@ -21,24 +21,30 @@ import java.util.List;
 public final class Drawing {
     private static final String TAG = Drawing.class.getSimpleName();
 
-    public static void drawPath(String result, GoogleMap map) throws JSONException {
-        for (String line : result.split("\n")) {
-            Log.v(TAG, result);
-        }
+    public static void drawPath(GoogleMap map, String... jsonresults) throws JSONException {
 
-        // Transform the string into a json object
-        final JSONObject json = new JSONObject(result);
-        JSONArray routeArray = json.getJSONArray("routes");
-        JSONObject routes = routeArray.getJSONObject(0);
-        JSONObject overviewPolylines = routes.getJSONObject("overview_polyline");
-        String encodedString = overviewPolylines.getString("points");
-        List<LatLng> list = decodePoly(encodedString);
-        Polyline line = map.addPolyline(new PolylineOptions()
-                .addAll(list)
+        PolylineOptions options = new PolylineOptions()
                 .width(12)
                 .color(Color.parseColor("#05b1fb"))//Google maps blue color
-                .geodesic(true)
-        );
+                .geodesic(true);
+
+        for (String result: jsonresults) {
+            for (String line : result.split("\n")) {
+                Log.v(TAG, result);
+            }
+
+            // Transform the string into a json object
+            final JSONObject json = new JSONObject(result);
+            JSONArray routeArray = json.getJSONArray("routes");
+            JSONObject routes = routeArray.getJSONObject(0);
+            JSONObject overviewPolylines = routes.getJSONObject("overview_polyline");
+            String encodedString = overviewPolylines.getString("points");
+            List<LatLng> list = decodePoly(encodedString);
+
+            options.addAll(list);
+        }
+
+        Polyline line = map.addPolyline(options);
                /*
                for(int z = 0; z<list.size()-1;z++){
                     LatLng src= list.get(z);
