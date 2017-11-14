@@ -53,7 +53,7 @@
 //    private String makeURL(LatLng[] waypoints) {
 //        try {
 //            StringBuilder urlString = new StringBuilder();
-//            urlString.append("https:maps.googleapis.com/maps/api/directions/json");
+//            urlString.append("https://maps.googleapis.com/maps/api/directions/json");
 //            urlString.append("?origin=");// from
 //            urlString.append(Double.toString(waypoints[0].latitude));
 //            urlString.append(",");
