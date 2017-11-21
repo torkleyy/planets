@@ -4,6 +4,7 @@ import android.content.pm.PackageManager;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -63,7 +64,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                 waypoints[i] = all[i].getLocation();
 
                 Marker m = googleMap.addMarker(new MarkerOptions()
-                        .title(all[i].toString())
+                        .title(all[i].getName())
                         .position(all[i].getLocation()));
                 m.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory
                         .HUE_VIOLET));
