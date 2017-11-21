@@ -17,7 +17,6 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import org.json.JSONException;
 
 import mainburg.planetenweg.directions.JsonData;
-import mainburg.planetenweg.directions.PathRequest;
 
 public class MapActivity extends FragmentActivity implements OnMapReadyCallback {
     private static final String TAG = MapActivity.class.getSimpleName();
@@ -62,9 +61,6 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
             final LatLng[] waypoints = new LatLng[all.length];
             for (int i = 0; i < waypoints.length; i++) {
                 waypoints[i] = all[i].getLocation();
-                if (all[i].toString().startsWith("ADDITIONAL_WAYPOINT")) {
-                    continue;
-                }
 
                 Marker m = googleMap.addMarker(new MarkerOptions()
                         .title(all[i].toString())
@@ -84,6 +80,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                     }
                 }
             });
+
         }
     }
 

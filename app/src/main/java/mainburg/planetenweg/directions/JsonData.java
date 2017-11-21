@@ -53,6 +53,11 @@ public final class JsonData {
                 "      },\n" +
                 "      {\n" +
                 "         \"geocoder_status\" : \"OK\",\n" +
+                "         \"place_id\" : \"ChIJPU8rbxBJnkcRWEoodGmDN94\",\n" +
+                "         \"types\" : [ \"street_address\" ]\n" +
+                "      },\n" +
+                "      {\n" +
+                "         \"geocoder_status\" : \"OK\",\n" +
                 "         \"place_id\" : \"ChIJLUuEKhFJnkcRGstgQGz6ioI\",\n" +
                 "         \"types\" : [ \"street_address\" ]\n" +
                 "      },\n" +
@@ -77,7 +82,7 @@ public final class JsonData {
                 "         \"bounds\" : {\n" +
                 "            \"northeast\" : {\n" +
                 "               \"lat\" : 48.6521724,\n" +
-                "               \"lng\" : 11.7993728\n" +
+                "               \"lng\" : 11.8003202\n" +
                 "            },\n" +
                 "            \"southwest\" : {\n" +
                 "               \"lat\" : 48.64271069999999,\n" +
@@ -467,17 +472,17 @@ public final class JsonData {
                 "            },\n" +
                 "            {\n" +
                 "               \"distance\" : {\n" +
-                "                  \"text\" : \"0,7 km\",\n" +
-                "                  \"value\" : 653\n" +
+                "                  \"text\" : \"0,5 km\",\n" +
+                "                  \"value\" : 534\n" +
                 "               },\n" +
                 "               \"duration\" : {\n" +
-                "                  \"text\" : \"10 Minuten\",\n" +
-                "                  \"value\" : 615\n" +
+                "                  \"text\" : \"9 Minuten\",\n" +
+                "                  \"value\" : 531\n" +
                 "               },\n" +
-                "               \"end_address\" : \"Brandholzstraße 31, 84048 Mainburg, Deutschland\",\n" +
+                "               \"end_address\" : \"Waldstraße 7, 84048 Mainburg, Deutschland\",\n" +
                 "               \"end_location\" : {\n" +
-                "                  \"lat\" : 48.6514832,\n" +
-                "                  \"lng\" : 11.7993728\n" +
+                "                  \"lat\" : 48.649916,\n" +
+                "                  \"lng\" : 11.7996737\n" +
                 "               },\n" +
                 "               \"start_address\" : \"Theresienstraße 8, 84048 Mainburg, Deutschland\",\n" +
                 "               \"start_location\" : {\n" +
@@ -487,48 +492,95 @@ public final class JsonData {
                 "               \"steps\" : [\n" +
                 "                  {\n" +
                 "                     \"distance\" : {\n" +
-                "                        \"text\" : \"0,4 km\",\n" +
-                "                        \"value\" : 358\n" +
+                "                        \"text\" : \"0,5 km\",\n" +
+                "                        \"value\" : 534\n" +
                 "                     },\n" +
                 "                     \"duration\" : {\n" +
-                "                        \"text\" : \"6 Minuten\",\n" +
-                "                        \"value\" : 377\n" +
+                "                        \"text\" : \"9 Minuten\",\n" +
+                "                        \"value\" : 531\n" +
                 "                     },\n" +
                 "                     \"end_location\" : {\n" +
-                "                        \"lat\" : 48.6492218,\n" +
-                "                        \"lng\" : 11.7975273\n" +
+                "                        \"lat\" : 48.649916,\n" +
+                "                        \"lng\" : 11.7996737\n" +
                 "                     },\n" +
                 "                     \"html_instructions\" : \"Auf \\u003cb\\u003eTheresienstraße\\u003c/b\\u003e nach \\u003cb\\u003eNordosten\\u003c/b\\u003e Richtung \\u003cb\\u003eHeckenweg\\u003c/b\\u003e\",\n" +
                 "                     \"polyline\" : {\n" +
-                "                        \"points\" : \"}o|gHwj~fAS}@SiAIi@CSCQASC[E}@Bo@c@cAOk@Qg@g@oBkAeDYu@\"\n" +
+                "                        \"points\" : \"}o|gHwj~fAS}@SiAIi@CSCQASC[E}@Bo@c@cAOk@Qg@g@oBkAeDYu@w@sCS_ASeAk@qC\"\n" +
                 "                     },\n" +
                 "                     \"start_location\" : {\n" +
                 "                        \"lat\" : 48.6478336,\n" +
                 "                        \"lng\" : 11.7932404\n" +
                 "                     },\n" +
                 "                     \"travel_mode\" : \"WALKING\"\n" +
+                "                  }\n" +
+                "               ],\n" +
+                "               \"traffic_speed_entry\" : [],\n" +
+                "               \"via_waypoint\" : []\n" +
+                "            },\n" +
+                "            {\n" +
+                "               \"distance\" : {\n" +
+                "                  \"text\" : \"0,2 km\",\n" +
+                "                  \"value\" : 220\n" +
+                "               },\n" +
+                "               \"duration\" : {\n" +
+                "                  \"text\" : \"3 Minuten\",\n" +
+                "                  \"value\" : 151\n" +
+                "               },\n" +
+                "               \"end_address\" : \"Brandholzstraße 31, 84048 Mainburg, Deutschland\",\n" +
+                "               \"end_location\" : {\n" +
+                "                  \"lat\" : 48.6514832,\n" +
+                "                  \"lng\" : 11.7993728\n" +
+                "               },\n" +
+                "               \"start_address\" : \"Waldstraße 7, 84048 Mainburg, Deutschland\",\n" +
+                "               \"start_location\" : {\n" +
+                "                  \"lat\" : 48.649916,\n" +
+                "                  \"lng\" : 11.7996737\n" +
+                "               },\n" +
+                "               \"steps\" : [\n" +
+                "                  {\n" +
+                "                     \"distance\" : {\n" +
+                "                        \"text\" : \"52 m\",\n" +
+                "                        \"value\" : 52\n" +
+                "                     },\n" +
+                "                     \"duration\" : {\n" +
+                "                        \"text\" : \"1 Minute\",\n" +
+                "                        \"value\" : 46\n" +
+                "                     },\n" +
+                "                     \"end_location\" : {\n" +
+                "                        \"lat\" : 48.6501092,\n" +
+                "                        \"lng\" : 11.8003202\n" +
+                "                     },\n" +
+                "                     \"html_instructions\" : \"Nach \\u003cb\\u003eNordosten\\u003c/b\\u003e\",\n" +
+                "                     \"polyline\" : {\n" +
+                "                        \"points\" : \"_}|gH}r_gAe@aC\"\n" +
+                "                     },\n" +
+                "                     \"start_location\" : {\n" +
+                "                        \"lat\" : 48.649916,\n" +
+                "                        \"lng\" : 11.7996737\n" +
+                "                     },\n" +
+                "                     \"travel_mode\" : \"WALKING\"\n" +
                 "                  },\n" +
                 "                  {\n" +
                 "                     \"distance\" : {\n" +
-                "                        \"text\" : \"0,3 km\",\n" +
-                "                        \"value\" : 295\n" +
+                "                        \"text\" : \"0,2 km\",\n" +
+                "                        \"value\" : 168\n" +
                 "                     },\n" +
                 "                     \"duration\" : {\n" +
-                "                        \"text\" : \"4 Minuten\",\n" +
-                "                        \"value\" : 238\n" +
+                "                        \"text\" : \"2 Minuten\",\n" +
+                "                        \"value\" : 105\n" +
                 "                     },\n" +
                 "                     \"end_location\" : {\n" +
                 "                        \"lat\" : 48.6514832,\n" +
                 "                        \"lng\" : 11.7993728\n" +
                 "                     },\n" +
-                "                     \"html_instructions\" : \"Leicht \\u003cb\\u003elinks\\u003c/b\\u003e abbiegen\",\n" +
-                "                     \"maneuver\" : \"turn-slight-left\",\n" +
+                "                     \"html_instructions\" : \"\\u003cb\\u003eLinks\\u003c/b\\u003e abbiegen\",\n" +
+                "                     \"maneuver\" : \"turn-left\",\n" +
                 "                     \"polyline\" : {\n" +
-                "                        \"points\" : \"sx|gHqe_gAOCm@O}A[[IKGEAUSUUq@q@iCwCQw@\"\n" +
+                "                        \"points\" : \"e~|gH_w_gAmFdDc@V\"\n" +
                 "                     },\n" +
                 "                     \"start_location\" : {\n" +
-                "                        \"lat\" : 48.6492218,\n" +
-                "                        \"lng\" : 11.7975273\n" +
+                "                        \"lat\" : 48.6501092,\n" +
+                "                        \"lng\" : 11.8003202\n" +
                 "                     },\n" +
                 "                     \"travel_mode\" : \"WALKING\"\n" +
                 "                  }\n" +
@@ -918,13 +970,13 @@ public final class JsonData {
                 "            }\n" +
                 "         ],\n" +
                 "         \"overview_polyline\" : {\n" +
-                "            \"points\" : \"mp{gH{b}fANwAm@?cB@[?[k@Yg@e@i@w@c@eAi@SQ_@o@Kb@GLE@w@eAuBmBgDgCg@Uo@[IFITEBE?[KI?E?@{@F{AHiCJ{Cc@a@_AqEe@yCEo@E}@Bo@c@cAOk@y@wCeB{E}@SyBe@QIk@i@{DiEQw@Pv@s@B[Fa@LArACbC?jA`@nEBzAKdCDbB^nDLzAXlBRvEIFGBM@m@@Cp@KVc@SKbAQrB?NNf@HPnA\\\\jCl@z@RLAPChB_AFAR@`Fl@ZCHIHOb@_BDEN@x@THJDN@FALd@H?l@rArA\"\n" +
+                "            \"points\" : \"mp{gH{b}fANwAm@?cB@[?[k@Yg@e@i@w@c@eAi@SQ_@o@Kb@GLE@w@eAuBmBgDgCg@Uo@[IFITEBE?[KI?E?@{@F{AHiCJ{Cc@a@_AqEe@yCEo@E}@Bo@c@cAOk@y@wCeB{EkAsE_AwEe@aCmFdDc@VPv@s@B[Fa@LArACbC?jA`@nEBzAKdCDbB^nDLzAXlBRvEIFGBM@m@@Cp@KVc@SKbAQrB?NNf@HPnA\\\\jCl@z@RLAPChB_AFAR@`Fl@ZCHIHOb@_BDEN@x@THJDN@FALd@H?l@rArA\"\n" +
                 "         },\n" +
                 "         \"summary\" : \"Abensberger Str.\",\n" +
                 "         \"warnings\" : [\n" +
                 "            \"Der Routenplaner für Fußgänger ist noch im Beta-Stadium. Sei vorsichtig! – Auf dieser Route gibt es eventuell keine Bürgersteige oder Fußwege.\"\n" +
                 "         ],\n" +
-                "         \"waypoint_order\" : [ 0, 1, 2, 3, 4, 5, 6, 7 ]\n" +
+                "         \"waypoint_order\" : [ 0, 1, 2, 3, 4, 5, 6, 7, 8 ]\n" +
                 "      }\n" +
                 "   ],\n" +
                 "   \"status\" : \"OK\"\n" +
@@ -956,6 +1008,11 @@ public final class JsonData {
                 "      },\n" +
                 "      {\n" +
                 "         \"geocoder_status\" : \"OK\",\n" +
+                "         \"place_id\" : \"ChIJbZNCASBJnkcRKquWHZUHhAU\",\n" +
+                "         \"types\" : [ \"street_address\" ]\n" +
+                "      },\n" +
+                "      {\n" +
+                "         \"geocoder_status\" : \"OK\",\n" +
                 "         \"place_id\" : \"ChIJrRylmR9JnkcRVKDusCT4VNw\",\n" +
                 "         \"types\" : [ \"street_address\" ]\n" +
                 "      },\n" +
@@ -978,8 +1035,8 @@ public final class JsonData {
                 "               \"lng\" : 11.790207\n" +
                 "            },\n" +
                 "            \"southwest\" : {\n" +
-                "               \"lat\" : 48.63974469999999,\n" +
-                "               \"lng\" : 11.7837155\n" +
+                "               \"lat\" : 48.6394113,\n" +
+                "               \"lng\" : 11.7832042\n" +
                 "            }\n" +
                 "         },\n" +
                 "         \"copyrights\" : \"Kartendaten © 2017 GeoBasis-DE/BKG (©2009), Google\",\n" +
@@ -1271,17 +1328,17 @@ public final class JsonData {
                 "            },\n" +
                 "            {\n" +
                 "               \"distance\" : {\n" +
-                "                  \"text\" : \"0,3 km\",\n" +
-                "                  \"value\" : 274\n" +
+                "                  \"text\" : \"0,2 km\",\n" +
+                "                  \"value\" : 235\n" +
                 "               },\n" +
                 "               \"duration\" : {\n" +
-                "                  \"text\" : \"4 Minuten\",\n" +
-                "                  \"value\" : 219\n" +
+                "                  \"text\" : \"3 Minuten\",\n" +
+                "                  \"value\" : 170\n" +
                 "               },\n" +
-                "               \"end_address\" : \"Marktpl. 8, 84048 Mainburg, Deutschland\",\n" +
+                "               \"end_address\" : \"Erberstraße 5, 84048 Mainburg, Deutschland\",\n" +
                 "               \"end_location\" : {\n" +
-                "                  \"lat\" : 48.6410177,\n" +
-                "                  \"lng\" : 11.7864612\n" +
+                "                  \"lat\" : 48.6395198,\n" +
+                "                  \"lng\" : 11.78375\n" +
                 "               },\n" +
                 "               \"start_address\" : \"Bahnhofstraße 13, 84048 Mainburg, Deutschland\",\n" +
                 "               \"start_location\" : {\n" +
@@ -1291,20 +1348,20 @@ public final class JsonData {
                 "               \"steps\" : [\n" +
                 "                  {\n" +
                 "                     \"distance\" : {\n" +
-                "                        \"text\" : \"68 m\",\n" +
-                "                        \"value\" : 68\n" +
+                "                        \"text\" : \"4 m\",\n" +
+                "                        \"value\" : 4\n" +
                 "                     },\n" +
                 "                     \"duration\" : {\n" +
                 "                        \"text\" : \"1 Minute\",\n" +
-                "                        \"value\" : 51\n" +
+                "                        \"value\" : 3\n" +
                 "                     },\n" +
                 "                     \"end_location\" : {\n" +
-                "                        \"lat\" : 48.6410446,\n" +
-                "                        \"lng\" : 11.7846677\n" +
+                "                        \"lat\" : 48.6411962,\n" +
+                "                        \"lng\" : 11.7837155\n" +
                 "                     },\n" +
-                "                     \"html_instructions\" : \"Nach \\u003cb\\u003eOsten\\u003c/b\\u003e Richtung \\u003cb\\u003ePaul-Nappenbach-Straße\\u003c/b\\u003e\",\n" +
+                "                     \"html_instructions\" : \"Nach \\u003cb\\u003eWesten\\u003c/b\\u003e\",\n" +
                 "                     \"polyline\" : {\n" +
-                "                        \"points\" : \"mf{gHqo|fA\\\\sD\"\n" +
+                "                        \"points\" : \"mf{gHqo|fAAH\"\n" +
                 "                     },\n" +
                 "                     \"start_location\" : {\n" +
                 "                        \"lat\" : 48.6411883,\n" +
@@ -1314,144 +1371,167 @@ public final class JsonData {
                 "                  },\n" +
                 "                  {\n" +
                 "                     \"distance\" : {\n" +
-                "                        \"text\" : \"11 m\",\n" +
-                "                        \"value\" : 11\n" +
+                "                        \"text\" : \"0,2 km\",\n" +
+                "                        \"value\" : 191\n" +
                 "                     },\n" +
                 "                     \"duration\" : {\n" +
-                "                        \"text\" : \"1 Minute\",\n" +
-                "                        \"value\" : 7\n" +
+                "                        \"text\" : \"2 Minuten\",\n" +
+                "                        \"value\" : 135\n" +
                 "                     },\n" +
                 "                     \"end_location\" : {\n" +
-                "                        \"lat\" : 48.6409485,\n" +
-                "                        \"lng\" : 11.7846564\n" +
+                "                        \"lat\" : 48.6395302,\n" +
+                "                        \"lng\" : 11.7832042\n" +
                 "                     },\n" +
-                "                     \"html_instructions\" : \"\\u003cb\\u003eRechts\\u003c/b\\u003e abbiegen auf \\u003cb\\u003ePaul-Nappenbach-Straße\\u003c/b\\u003e\",\n" +
-                "                     \"maneuver\" : \"turn-right\",\n" +
-                "                     \"polyline\" : {\n" +
-                "                        \"points\" : \"oe{gHeu|fAP@\"\n" +
-                "                     },\n" +
-                "                     \"start_location\" : {\n" +
-                "                        \"lat\" : 48.6410446,\n" +
-                "                        \"lng\" : 11.7846677\n" +
-                "                     },\n" +
-                "                     \"travel_mode\" : \"WALKING\"\n" +
-                "                  },\n" +
-                "                  {\n" +
-                "                     \"distance\" : {\n" +
-                "                        \"text\" : \"28 m\",\n" +
-                "                        \"value\" : 28\n" +
-                "                     },\n" +
-                "                     \"duration\" : {\n" +
-                "                        \"text\" : \"1 Minute\",\n" +
-                "                        \"value\" : 27\n" +
-                "                     },\n" +
-                "                     \"end_location\" : {\n" +
-                "                        \"lat\" : 48.6409244,\n" +
-                "                        \"lng\" : 11.7850356\n" +
-                "                     },\n" +
-                "                     \"html_instructions\" : \"\\u003cb\\u003eLinks\\u003c/b\\u003e Richtung \\u003cb\\u003eAm Graben\\u003c/b\\u003e abbiegen\",\n" +
+                "                     \"html_instructions\" : \"\\u003cb\\u003eLinks\\u003c/b\\u003e abbiegen auf \\u003cb\\u003eUferstraße\\u003c/b\\u003e\",\n" +
                 "                     \"maneuver\" : \"turn-left\",\n" +
                 "                     \"polyline\" : {\n" +
-                "                        \"points\" : \"}d{gHcu|fADkA\"\n" +
+                "                        \"points\" : \"of{gHgo|fAp@d@f@Rb@Jl@LpAPnA@\"\n" +
                 "                     },\n" +
                 "                     \"start_location\" : {\n" +
-                "                        \"lat\" : 48.6409485,\n" +
-                "                        \"lng\" : 11.7846564\n" +
+                "                        \"lat\" : 48.6411962,\n" +
+                "                        \"lng\" : 11.7837155\n" +
                 "                     },\n" +
                 "                     \"travel_mode\" : \"WALKING\"\n" +
                 "                  },\n" +
                 "                  {\n" +
                 "                     \"distance\" : {\n" +
-                "                        \"text\" : \"20 m\",\n" +
-                "                        \"value\" : 20\n" +
+                "                        \"text\" : \"40 m\",\n" +
+                "                        \"value\" : 40\n" +
                 "                     },\n" +
                 "                     \"duration\" : {\n" +
                 "                        \"text\" : \"1 Minute\",\n" +
-                "                        \"value\" : 15\n" +
+                "                        \"value\" : 32\n" +
                 "                     },\n" +
                 "                     \"end_location\" : {\n" +
-                "                        \"lat\" : 48.6407468,\n" +
-                "                        \"lng\" : 11.7850119\n" +
+                "                        \"lat\" : 48.6395198,\n" +
+                "                        \"lng\" : 11.78375\n" +
                 "                     },\n" +
-                "                     \"html_instructions\" : \"\\u003cb\\u003eRechts\\u003c/b\\u003e abbiegen auf \\u003cb\\u003eAm Graben\\u003c/b\\u003e\",\n" +
-                "                     \"maneuver\" : \"turn-right\",\n" +
-                "                     \"polyline\" : {\n" +
-                "                        \"points\" : \"wd{gHow|fA`@D\"\n" +
-                "                     },\n" +
-                "                     \"start_location\" : {\n" +
-                "                        \"lat\" : 48.6409244,\n" +
-                "                        \"lng\" : 11.7850356\n" +
-                "                     },\n" +
-                "                     \"travel_mode\" : \"WALKING\"\n" +
-                "                  },\n" +
-                "                  {\n" +
-                "                     \"distance\" : {\n" +
-                "                        \"text\" : \"87 m\",\n" +
-                "                        \"value\" : 87\n" +
-                "                     },\n" +
-                "                     \"duration\" : {\n" +
-                "                        \"text\" : \"1 Minute\",\n" +
-                "                        \"value\" : 66\n" +
-                "                     },\n" +
-                "                     \"end_location\" : {\n" +
-                "                        \"lat\" : 48.6412028,\n" +
-                "                        \"lng\" : 11.7856968\n" +
-                "                     },\n" +
-                "                     \"html_instructions\" : \"\\u003cb\\u003eLinks\\u003c/b\\u003e abbiegen auf \\u003cb\\u003eBrandstatt\\u003c/b\\u003e\",\n" +
+                "                     \"html_instructions\" : \"\\u003cb\\u003eLinks\\u003c/b\\u003e abbiegen auf \\u003cb\\u003eErberstraße\\u003c/b\\u003e\",\n" +
                 "                     \"maneuver\" : \"turn-left\",\n" +
                 "                     \"polyline\" : {\n" +
-                "                        \"points\" : \"uc{gHiw|fA@a@?CAEACAAGEEA?AAA?AAA?E?M?O?C?CAAAAAAQEk@O\"\n" +
+                "                        \"points\" : \"a|zgH_l|fA@mB\"\n" +
                 "                     },\n" +
                 "                     \"start_location\" : {\n" +
-                "                        \"lat\" : 48.6407468,\n" +
-                "                        \"lng\" : 11.7850119\n" +
+                "                        \"lat\" : 48.6395302,\n" +
+                "                        \"lng\" : 11.7832042\n" +
                 "                     },\n" +
                 "                     \"travel_mode\" : \"WALKING\"\n" +
-                "                  },\n" +
+                "                  }\n" +
+                "               ],\n" +
+                "               \"traffic_speed_entry\" : [],\n" +
+                "               \"via_waypoint\" : []\n" +
+                "            },\n" +
+                "            {\n" +
+                "               \"distance\" : {\n" +
+                "                  \"text\" : \"0,3 km\",\n" +
+                "                  \"value\" : 321\n" +
+                "               },\n" +
+                "               \"duration\" : {\n" +
+                "                  \"text\" : \"4 Minuten\",\n" +
+                "                  \"value\" : 263\n" +
+                "               },\n" +
+                "               \"end_address\" : \"Marktpl. 8, 84048 Mainburg, Deutschland\",\n" +
+                "               \"end_location\" : {\n" +
+                "                  \"lat\" : 48.6410177,\n" +
+                "                  \"lng\" : 11.7864612\n" +
+                "               },\n" +
+                "               \"start_address\" : \"Erberstraße 5, 84048 Mainburg, Deutschland\",\n" +
+                "               \"start_location\" : {\n" +
+                "                  \"lat\" : 48.6395198,\n" +
+                "                  \"lng\" : 11.78375\n" +
+                "               },\n" +
+                "               \"steps\" : [\n" +
                 "                  {\n" +
                 "                     \"distance\" : {\n" +
-                "                        \"text\" : \"37 m\",\n" +
-                "                        \"value\" : 37\n" +
+                "                        \"text\" : \"0,1 km\",\n" +
+                "                        \"value\" : 104\n" +
                 "                     },\n" +
                 "                     \"duration\" : {\n" +
-                "                        \"text\" : \"1 Minute\",\n" +
-                "                        \"value\" : 30\n" +
+                "                        \"text\" : \"2 Minuten\",\n" +
+                "                        \"value\" : 98\n" +
                 "                     },\n" +
                 "                     \"end_location\" : {\n" +
-                "                        \"lat\" : 48.6411015,\n" +
-                "                        \"lng\" : 11.78617\n" +
+                "                        \"lat\" : 48.6394113,\n" +
+                "                        \"lng\" : 11.7851461\n" +
                 "                     },\n" +
-                "                     \"html_instructions\" : \"\\u003cb\\u003eRechts\\u003c/b\\u003e abbiegen auf \\u003cb\\u003eLiebfrauenstraße\\u003c/b\\u003e\",\n" +
-                "                     \"maneuver\" : \"turn-right\",\n" +
+                "                     \"html_instructions\" : \"Auf \\u003cb\\u003eErberstraße\\u003c/b\\u003e nach \\u003cb\\u003eOsten\\u003c/b\\u003e Richtung \\u003cb\\u003ePaul-Nappenbach-Straße\\u003c/b\\u003e\",\n" +
                 "                     \"polyline\" : {\n" +
-                "                        \"points\" : \"of{gHs{|fAR}A\"\n" +
+                "                        \"points\" : \"_|zgHmo|fA@}BJmAFkA\"\n" +
                 "                     },\n" +
                 "                     \"start_location\" : {\n" +
-                "                        \"lat\" : 48.6412028,\n" +
-                "                        \"lng\" : 11.7856968\n" +
+                "                        \"lat\" : 48.6395198,\n" +
+                "                        \"lng\" : 11.78375\n" +
                 "                     },\n" +
                 "                     \"travel_mode\" : \"WALKING\"\n" +
                 "                  },\n" +
                 "                  {\n" +
                 "                     \"distance\" : {\n" +
-                "                        \"text\" : \"23 m\",\n" +
-                "                        \"value\" : 23\n" +
+                "                        \"text\" : \"0,1 km\",\n" +
+                "                        \"value\" : 131\n" +
+                "                     },\n" +
+                "                     \"duration\" : {\n" +
+                "                        \"text\" : \"2 Minuten\",\n" +
+                "                        \"value\" : 104\n" +
+                "                     },\n" +
+                "                     \"end_location\" : {\n" +
+                "                        \"lat\" : 48.6404283,\n" +
+                "                        \"lng\" : 11.785978\n" +
+                "                     },\n" +
+                "                     \"html_instructions\" : \"\\u003cb\\u003eLinks\\u003c/b\\u003e abbiegen auf \\u003cb\\u003eLandshuter Str.\\u003c/b\\u003e\",\n" +
+                "                     \"maneuver\" : \"turn-left\",\n" +
+                "                     \"polyline\" : {\n" +
+                "                        \"points\" : \"i{zgHex|fAk@GUSi@k@]_@SUQQ[U\"\n" +
+                "                     },\n" +
+                "                     \"start_location\" : {\n" +
+                "                        \"lat\" : 48.6394113,\n" +
+                "                        \"lng\" : 11.7851461\n" +
+                "                     },\n" +
+                "                     \"travel_mode\" : \"WALKING\"\n" +
+                "                  },\n" +
+                "                  {\n" +
+                "                     \"distance\" : {\n" +
+                "                        \"text\" : \"74 m\",\n" +
+                "                        \"value\" : 74\n" +
                 "                     },\n" +
                 "                     \"duration\" : {\n" +
                 "                        \"text\" : \"1 Minute\",\n" +
-                "                        \"value\" : 23\n" +
+                "                        \"value\" : 49\n" +
+                "                     },\n" +
+                "                     \"end_location\" : {\n" +
+                "                        \"lat\" : 48.641057,\n" +
+                "                        \"lng\" : 11.7863117\n" +
+                "                     },\n" +
+                "                     \"html_instructions\" : \"Weiter auf \\u003cb\\u003eMarktpl.\\u003c/b\\u003e\",\n" +
+                "                     \"polyline\" : {\n" +
+                "                        \"points\" : \"ua{gHk}|fAGEYO[O_A[\"\n" +
+                "                     },\n" +
+                "                     \"start_location\" : {\n" +
+                "                        \"lat\" : 48.6404283,\n" +
+                "                        \"lng\" : 11.785978\n" +
+                "                     },\n" +
+                "                     \"travel_mode\" : \"WALKING\"\n" +
+                "                  },\n" +
+                "                  {\n" +
+                "                     \"distance\" : {\n" +
+                "                        \"text\" : \"12 m\",\n" +
+                "                        \"value\" : 12\n" +
+                "                     },\n" +
+                "                     \"duration\" : {\n" +
+                "                        \"text\" : \"1 Minute\",\n" +
+                "                        \"value\" : 12\n" +
                 "                     },\n" +
                 "                     \"end_location\" : {\n" +
                 "                        \"lat\" : 48.6410177,\n" +
                 "                        \"lng\" : 11.7864612\n" +
                 "                     },\n" +
-                "                     \"html_instructions\" : \"Weiter auf \\u003cb\\u003eMarktpl.\\u003c/b\\u003e\",\n" +
+                "                     \"html_instructions\" : \"Nach \\u003cb\\u003erechts\\u003c/b\\u003e abbiegen, um auf \\u003cb\\u003eMarktpl.\\u003c/b\\u003e zu bleiben\",\n" +
+                "                     \"maneuver\" : \"turn-right\",\n" +
                 "                     \"polyline\" : {\n" +
-                "                        \"points\" : \"{e{gHq~|fAF[F]\"\n" +
+                "                        \"points\" : \"se{gHm_}fAF]\"\n" +
                 "                     },\n" +
                 "                     \"start_location\" : {\n" +
-                "                        \"lat\" : 48.6411015,\n" +
-                "                        \"lng\" : 11.78617\n" +
+                "                        \"lat\" : 48.641057,\n" +
+                "                        \"lng\" : 11.7863117\n" +
                 "                     },\n" +
                 "                     \"travel_mode\" : \"WALKING\"\n" +
                 "                  }\n" +
@@ -1649,13 +1729,13 @@ public final class JsonData {
                 "            }\n" +
                 "         ],\n" +
                 "         \"overview_polyline\" : {\n" +
-                "            \"points\" : \"gh|gHgn}fAv@z@x@\\\\p@Zj@\\\\AnAIxAA`AHb@v@tBt@m@lBoBf@a@^Yb@|B^dBp@bCh@jBf@pA\\\\l@XVTHhAHb@BBg@B_@\\\\?TBZFVNh@b@h@b@@I\\\\sDP@DkA`@D@e@CIOKCK?e@CCSGk@OR}ANy@`@wAd@eANg@f@gAh@g@FAPN\\\\_AJe@H{@F_BOo@o@e@MDQUc@IoAq@]Oa@Ik@G]@YJ@h@\"\n" +
+                "            \"points\" : \"gh|gHgn}fAv@z@x@\\\\p@Zj@\\\\AnAIxAA`AHb@v@tBt@m@lBoBf@a@^Yb@|B^dBp@bCh@jBf@pA\\\\l@XVTHhAHb@BBg@B_@\\\\?TBZFVNh@b@h@b@@IAHp@d@f@Rb@Jl@LpAPnA@@mB@}BJmAFkAk@G_A_Aq@u@m@g@a@U{Ak@Jg@\\\\mA`@}@L_@Vk@Tk@TWXQRN\\\\_AJe@NuBC_AIU[WSME?GDQUc@I{@e@q@[u@Mi@CWFMD@h@\"\n" +
                 "         },\n" +
                 "         \"summary\" : \"Abenstalstraße\",\n" +
                 "         \"warnings\" : [\n" +
                 "            \"Der Routenplaner für Fußgänger ist noch im Beta-Stadium. Sei vorsichtig! – Auf dieser Route gibt es eventuell keine Bürgersteige oder Fußwege.\"\n" +
                 "         ],\n" +
-                "         \"waypoint_order\" : [ 0, 1, 2, 3, 4 ]\n" +
+                "         \"waypoint_order\" : [ 0, 1, 2, 3, 4, 5 ]\n" +
                 "      }\n" +
                 "   ],\n" +
                 "   \"status\" : \"OK\"\n" +
