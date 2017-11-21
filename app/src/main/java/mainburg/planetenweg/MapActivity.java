@@ -88,7 +88,6 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
                     }
                 }
             });
-
             googleMap.setInfoWindowAdapter(this);
         }
     }
