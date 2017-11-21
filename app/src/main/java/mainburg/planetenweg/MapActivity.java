@@ -1,10 +1,13 @@
 package mainburg.planetenweg;
 
 import android.content.pm.PackageManager;
+import android.media.Image;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -19,11 +22,13 @@ import org.json.JSONException;
 
 import mainburg.planetenweg.directions.JsonData;
 
-public class MapActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.InfoWindowAdapter {
     private static final String TAG = MapActivity.class.getSimpleName();
 
     private LocationMarker locMarker;
     private boolean firstTimeLoad = true;
+
+    private View infoView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +40,8 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         mapFragment.getMapAsync(this);
 
         locMarker = new LocationMarker(this);
+
+        infoView = getLayoutInflater().inflate(R.layout.planets_info_window, null);
     }
 
     /**
@@ -82,6 +89,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                 }
             });
 
+            googleMap.setInfoWindowAdapter(this);
         }
     }
 
@@ -101,6 +109,64 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                         && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
                     locMarker.refresh();
                 }
+                break;
+        }
+    }
+
+    @Override
+    public View getInfoWindow(Marker marker) {
+        return null;
+    }
+
+    @Override
+    public View getInfoContents(Marker marker) {
+        updateInfoView(Waypoint.fromName(marker.getTitle()));
+        return infoView;
+    }
+    private void updateInfoView(Waypoint w) {
+        TextView title = (TextView) infoView.findViewById(R.id.planets_info_title);
+        title.setText(w.getName());
+        Log.d("", "Set Title to: "+w.getName());
+        ImageView image = (ImageView) infoView.findViewById(R.id.planets_info_picture);
+        TextView text = (TextView) infoView.findViewById(R.id.planets_info_text);
+
+        switch (w) {
+
+            case SUN:
+                image.setImageResource(R.drawable.sun);
+                text.setText(R.string.description_sun);
+                break;
+            case MERCURY:
+                image.setImageResource(R.drawable.planet_mercury);
+                text.setText(R.string.description_mercury);
+                break;
+            case VENUS:
+                image.setImageResource(R.drawable.planet_venus);
+                text.setText(R.string.description_venus);
+                break;
+            case EARTH:
+                image.setImageResource(R.drawable.planet_earth);
+                text.setText(R.string.description_earth);
+                break;
+            case MARS:
+                image.setImageResource(R.drawable.planet_mars);
+                text.setText(R.string.description_mars);
+                break;
+            case JUPITER:
+                image.setImageResource(R.drawable.planet_jupiter);
+                text.setText(R.string.description_jupiter);
+                break;
+            case SATURN:
+                image.setImageResource(R.drawable.planet_saturn);
+                text.setText(R.string.description_saturn);
+                break;
+            case URANUS:
+                image.setImageResource(R.drawable.planet_uranus);
+                text.setText(R.string.description_uranus);
+                break;
+            case NEPTUNE:
+                image.setImageResource(R.drawable.planet_neptune);
+                text.setText(R.string.description_neptune);
                 break;
         }
     }
