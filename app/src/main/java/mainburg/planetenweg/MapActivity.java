@@ -1,7 +1,6 @@
 package mainburg.planetenweg;
 
 import android.content.pm.PackageManager;
-import android.media.Image;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -81,7 +80,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
                 @Override
                 public void run() {
                     try {
-                        Drawing.drawPath(googleMap, JsonData.getRoutePart1(), JsonData.getRoutePart2());
+                        Drawing.drawPath(googleMap, JsonData.getRoutePart1(), JsonData.getRoutePart2(), JsonData.getRoutePart3());
                     } catch (JSONException e) {
                         // Should not occur, but here you go:
                         Log.e(TAG, "Bug: stored JSON is invalid");
@@ -119,13 +118,16 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
 
     @Override
     public View getInfoContents(Marker marker) {
-        updateInfoView(Waypoint.fromName(marker.getTitle()));
+        Waypoint w = Waypoint.fromName(marker.getTitle());
+        if (w == null) {
+            return null;
+        }
+        updateInfoView(w);
         return infoView;
     }
     private void updateInfoView(Waypoint w) {
         TextView title = (TextView) infoView.findViewById(R.id.planets_info_title);
         title.setText(w.getName());
-        Log.d("", "Set Title to: "+w.getName());
         ImageView image = (ImageView) infoView.findViewById(R.id.planets_info_picture);
         TextView text = (TextView) infoView.findViewById(R.id.planets_info_text);
 
