@@ -15,4 +15,13 @@
     <string name="description_saturn">Woher hat Saturn eigentlich seine Ringe? So oft verheiratet?</string>
     <string name="description_uranus">Mir fällt nichts zu Uranus ein. Pech gehabt.</string>
     <string name="description_neptune">Da Pluto aus dem Sonnensystem geschmissen wurde, ist er jetzt ganz außen.</string>
+    <string name="name_sun">Sonne</string>
+    <string name="name_mercury">Merkur</string>
+    <string name="name_venus">Venus</string>
+    <string name="name_earth">Erde</string>
+    <string name="name_mars">Mars</string>
+    <string name="name_jupiter">Jupiter</string>
+    <string name="name_saturn">Saturn</string>
+    <string name="name_uranus">Uranus</string>
+    <string name="name_neptune">Neptun</string>
 </resources>

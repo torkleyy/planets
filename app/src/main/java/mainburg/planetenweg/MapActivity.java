@@ -70,7 +70,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
                 waypoints[i] = all[i].getLocation();
 
                 Marker m = googleMap.addMarker(new MarkerOptions()
-                        .title(all[i].getName())
+                        .title(all[i].getName(this))
                         .position(all[i].getLocation()));
                 m.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory
                         .HUE_VIOLET));
@@ -118,7 +118,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
 
     @Override
     public View getInfoContents(Marker marker) {
-        Waypoint w = Waypoint.fromName(marker.getTitle());
+        Waypoint w = Waypoint.fromName(marker.getTitle(), this);
         if (w == null) {
             return null;
         }
@@ -127,7 +127,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
     }
     private void updateInfoView(Waypoint w) {
         TextView title = (TextView) infoView.findViewById(R.id.planets_info_title);
-        title.setText(w.getName());
+        title.setText(w.getName(this));
         ImageView image = (ImageView) infoView.findViewById(R.id.planets_info_picture);
         TextView text = (TextView) infoView.findViewById(R.id.planets_info_text);
 
