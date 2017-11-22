@@ -1,7 +1,5 @@
 package mainburg.planetenweg;
 
-import android.*;
-import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
@@ -10,7 +8,6 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.os.Debug;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
@@ -33,7 +30,7 @@ import java.util.TimerTask;
  */
 public class LocationMarker implements LocationListener {
     private static final String TAG = LocationMarker.class.getSimpleName();
-    private static final int MIN_UPDATE_DELAY = 5000;
+    private static final int MIN_UPDATE_DELAY = 3000;
     private static final int MIN_DISTANCE_FOR_UPDATE = 5;
     private static final int UNSUCCESSFUL_TRACK_DELAY = 10000;
 
@@ -63,7 +60,7 @@ public class LocationMarker implements LocationListener {
         enabled = false;
         gps = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
         timersUnderway = 0;
-        trackLocation = false;
+        trackLocation = true;
     }
 
     /**
@@ -165,6 +162,7 @@ public class LocationMarker implements LocationListener {
         position.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
 
         if (trackLocation) {
+            trackLocation = false;// I decided to make it track you the first time your position was determined.
             map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, map.getCameraPosition().zoom));
         }
     }
@@ -178,6 +176,8 @@ public class LocationMarker implements LocationListener {
         if (position != null) {
             position.remove();
         }
+
+        locationFound = true;// Nothing left to find in this case ;)
     }
 
     @Override
