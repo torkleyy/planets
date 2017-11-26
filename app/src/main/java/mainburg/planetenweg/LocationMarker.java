@@ -1,7 +1,5 @@
 package mainburg.planetenweg;
 
-import android.*;
-import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
@@ -10,7 +8,6 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.os.Debug;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
@@ -33,7 +30,7 @@ import java.util.TimerTask;
  */
 public class LocationMarker implements LocationListener {
     private static final String TAG = LocationMarker.class.getSimpleName();
-    private static final int MIN_UPDATE_DELAY = 5000;
+    private static final int MIN_UPDATE_DELAY = 3000;
     private static final int MIN_DISTANCE_FOR_UPDATE = 5;
     private static final int UNSUCCESSFUL_TRACK_DELAY = 10000;
 
@@ -50,20 +47,32 @@ public class LocationMarker implements LocationListener {
      * It is needed to notify the user when their location could not have been determined.
      */
     private boolean locationFound;
+
+    private static final String TRACK_LOCATION_KEY = "mainburg.planetenweg.trackLocation";
     private boolean trackLocation;
+
+    private static final String GPS_DISABLED_KEY = "mainburg.planetenweg.gpsDisabled";
+    private boolean disabledGPSKnown;
     /**
      * This variable counts the amount of timers which delay the message that your location
      * could not have been determined which are simultaneously running.
      */
     private int timersUnderway;
 
-    public LocationMarker(Activity activity) {
+    public LocationMarker(Activity activity, Bundle savedInstanceState) {
         this.map = map;
         this.activity = activity;
         enabled = false;
         gps = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
         timersUnderway = 0;
-        trackLocation = false;
+
+        if (savedInstanceState != null) {
+            trackLocation = savedInstanceState.getBoolean(TRACK_LOCATION_KEY);
+            disabledGPSKnown = savedInstanceState.getBoolean(GPS_DISABLED_KEY);
+        } else {
+            trackLocation = true;
+            disabledGPSKnown = false;
+        }
     }
 
     /**
@@ -165,6 +174,7 @@ public class LocationMarker implements LocationListener {
         position.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
 
         if (trackLocation) {
+            trackLocation = false;// I decided to make it track you the first time your position was determined.
             map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, map.getCameraPosition().zoom));
         }
     }
@@ -172,24 +182,37 @@ public class LocationMarker implements LocationListener {
     @Override
     public void onProviderDisabled(String provider) {
         /* ******* Called when User disables Gps ******** */
-        Toast.makeText(activity.getBaseContext(), activity.getResources().getString(R.string
-                .gps_disabled), Toast.LENGTH_LONG).show();
+
+        if (!disabledGPSKnown) {
+            Toast.makeText(activity.getBaseContext(), activity.getResources().getString(R.string
+                    .gps_disabled), Toast.LENGTH_LONG).show();
+        }
+        disabledGPSKnown = true;
 
         if (position != null) {
             position.remove();
         }
+
+        locationFound = true;// Nothing left to find in this case ;)
     }
 
     @Override
     public void onProviderEnabled(String provider) {
         /* ******* Called when User enables Gps  ******** */
 
+        disabledGPSKnown = false;
         Toast.makeText(activity.getBaseContext(), activity.getResources().getString(R.string
                 .gps_enabled), Toast.LENGTH_LONG).show();
         refresh();
+
     }
 
     @Override
     public void onStatusChanged(String provider, int status, Bundle extras) {
+    }
+
+    void onSaveInstanceState(Bundle outState) {
+        outState.putBoolean(TRACK_LOCATION_KEY, trackLocation);
+        outState.putBoolean(GPS_DISABLED_KEY, disabledGPSKnown);
     }
 }
