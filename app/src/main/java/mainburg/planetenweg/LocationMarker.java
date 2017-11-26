@@ -47,20 +47,32 @@ public class LocationMarker implements LocationListener {
      * It is needed to notify the user when their location could not have been determined.
      */
     private boolean locationFound;
+
+    private static final String TRACK_LOCATION_KEY = "trackLocation";
     private boolean trackLocation;
+
+    private static final String GPS_DISABLED_KEY = "gpsDisabled";
+    private boolean disabledGPSKnown;
     /**
      * This variable counts the amount of timers which delay the message that your location
      * could not have been determined which are simultaneously running.
      */
     private int timersUnderway;
 
-    public LocationMarker(Activity activity) {
+    public LocationMarker(Activity activity, Bundle savedInstanceState) {
         this.map = map;
         this.activity = activity;
         enabled = false;
         gps = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
         timersUnderway = 0;
-        trackLocation = true;
+
+        if (savedInstanceState != null) {
+            trackLocation = savedInstanceState.getBoolean(TRACK_LOCATION_KEY);
+            disabledGPSKnown = savedInstanceState.getBoolean(GPS_DISABLED_KEY);
+        } else {
+            trackLocation = true;
+            disabledGPSKnown = false;
+        }
     }
 
     /**
@@ -170,8 +182,12 @@ public class LocationMarker implements LocationListener {
     @Override
     public void onProviderDisabled(String provider) {
         /* ******* Called when User disables Gps ******** */
-        Toast.makeText(activity.getBaseContext(), activity.getResources().getString(R.string
-                .gps_disabled), Toast.LENGTH_LONG).show();
+
+        if (!disabledGPSKnown) {
+            Toast.makeText(activity.getBaseContext(), activity.getResources().getString(R.string
+                    .gps_disabled), Toast.LENGTH_LONG).show();
+        }
+        disabledGPSKnown = true;
 
         if (position != null) {
             position.remove();
@@ -184,12 +200,19 @@ public class LocationMarker implements LocationListener {
     public void onProviderEnabled(String provider) {
         /* ******* Called when User enables Gps  ******** */
 
+        disabledGPSKnown = false;
         Toast.makeText(activity.getBaseContext(), activity.getResources().getString(R.string
                 .gps_enabled), Toast.LENGTH_LONG).show();
         refresh();
+
     }
 
     @Override
     public void onStatusChanged(String provider, int status, Bundle extras) {
+    }
+
+    void onSaveInstanceState(Bundle outState) {
+        outState.putBoolean(TRACK_LOCATION_KEY, trackLocation);
+        outState.putBoolean(GPS_DISABLED_KEY, disabledGPSKnown);
     }
 }

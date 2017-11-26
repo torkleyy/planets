@@ -10,7 +10,7 @@
     <string name="description_mercury">Merkur ist der am nähesten an der Sonne gelegene Planet.</string>
     <string name="description_venus">Venus hat keine Bedeutung. Keiner interessiert sich für ihn. :D"</string>
     <string name="description_earth">Die Erde. Unser Heimatplanet.</string>
-    <string name="description_mars">Hier laufen angeblich Marsmenschen rum.</string>
+    <string name="description_mars">Hier laufen angeblich\n Marsmenschen rum.</string>
     <string name="description_jupiter">Ein Gasplanet und derjenige, der in unserem Sonnensystem am ehesten eine Diät nötig hat.</string>
     <string name="description_saturn">Woher hat Saturn eigentlich seine Ringe? So oft verheiratet?</string>
     <string name="description_uranus">Mir fällt nichts zu Uranus ein. Pech gehabt.</string>

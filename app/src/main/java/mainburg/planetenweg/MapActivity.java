@@ -25,6 +25,8 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
     private static final String TAG = MapActivity.class.getSimpleName();
 
     private LocationMarker locMarker;
+
+    private static final String FIRST_TIME_LOAD_KEY = "firstTimeLoad";
     private boolean firstTimeLoad = true;
 
     private View infoView;
@@ -38,7 +40,11 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        locMarker = new LocationMarker(this);
+        locMarker = new LocationMarker(this, savedInstanceState);
+
+        if (savedInstanceState != null) {
+            firstTimeLoad = savedInstanceState.getBoolean(FIRST_TIME_LOAD_KEY);
+        }
 
         infoView = getLayoutInflater().inflate(R.layout.planets_info_window, null);
     }
@@ -55,40 +61,48 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
     @Override
     public void onMapReady(final GoogleMap googleMap) {
         if (firstTimeLoad) {
-            LatLng mainburg = new LatLng(48.64, 11.78);
+            LatLng mainburg = new LatLng(48.645, 11.792);
             googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mainburg, 14.5f));
             firstTimeLoad = false;// I don't want the map to focus on Mainburg everytime the
             // activity reloads (e.g. when the user switches display rotation)
-
-            if (!locMarker.isEnabled()) {
-                locMarker.enable(googleMap);
-            }
-
-            Waypoint[] all = Waypoint.values();
-            final LatLng[] waypoints = new LatLng[all.length];
-            for (int i = 0; i < waypoints.length; i++) {
-                waypoints[i] = all[i].getLocation();
-
-                Marker m = googleMap.addMarker(new MarkerOptions()
-                        .title(all[i].getName(this))
-                        .position(all[i].getLocation()));
-                m.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory
-                        .HUE_VIOLET));
-            }
-
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        Drawing.drawPath(googleMap, JsonData.getRoutePart1(), JsonData.getRoutePart2(), JsonData.getRoutePart3());
-                    } catch (JSONException e) {
-                        // Should not occur, but here you go:
-                        Log.e(TAG, "Bug: stored JSON is invalid");
-                    }
-                }
-            });
-            googleMap.setInfoWindowAdapter(this);
         }
+
+        if (!locMarker.isEnabled()) {
+            locMarker.enable(googleMap);
+        }
+
+        Waypoint[] all = Waypoint.values();
+        final LatLng[] waypoints = new LatLng[all.length];
+        for (int i = 0; i < waypoints.length; i++) {
+            waypoints[i] = all[i].getLocation();
+
+            Marker m = googleMap.addMarker(new MarkerOptions()
+                    .title(all[i].getName(this))
+                    .position(all[i].getLocation()));
+            m.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory
+                    .HUE_VIOLET));
+        }
+
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Drawing.drawPath(googleMap, JsonData.getRoutePart1(), JsonData.getRoutePart2(), JsonData.getRoutePart3());
+                } catch (JSONException e) {
+                    // Should not occur, but here you go:
+                    Log.e(TAG, "Bug: stored JSON is invalid");
+                }
+            }
+        });
+        googleMap.setInfoWindowAdapter(this);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putBoolean(FIRST_TIME_LOAD_KEY, firstTimeLoad);
+        locMarker.onSaveInstanceState(outState);
     }
 
     @Override
