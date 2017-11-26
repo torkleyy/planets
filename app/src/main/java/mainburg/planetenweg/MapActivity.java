@@ -26,7 +26,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
 
     private LocationMarker locMarker;
 
-    private static final String FIRST_TIME_LOAD_KEY = "firstTimeLoad";
+    private static final String FIRST_TIME_LOAD_KEY = "mainburg.planetenweg.firstTimeLoad";
     private boolean firstTimeLoad = true;
 
     private View infoView;

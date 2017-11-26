@@ -48,10 +48,10 @@ public class LocationMarker implements LocationListener {
      */
     private boolean locationFound;
 
-    private static final String TRACK_LOCATION_KEY = "trackLocation";
+    private static final String TRACK_LOCATION_KEY = "mainburg.planetenweg.trackLocation";
     private boolean trackLocation;
 
-    private static final String GPS_DISABLED_KEY = "gpsDisabled";
+    private static final String GPS_DISABLED_KEY = "mainburg.planetenweg.gpsDisabled";
     private boolean disabledGPSKnown;
     /**
      * This variable counts the amount of timers which delay the message that your location
